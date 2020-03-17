@@ -18,7 +18,7 @@ process.env.SEED = process.env.SEED || 'desarrollo';
 let urlDB;
 
 if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb://localhost:27017/dbInab';
+    urlDB = 'mongodb://192.168.1.232:27017/dbInab';
 } else {
     urlDB = process.env.URLDB;
 };

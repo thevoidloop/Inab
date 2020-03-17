@@ -11,11 +11,11 @@ let categorySchema = new Schema({
     },
     valid: {
         type: Boolean,
-        default: false
+        default: true
     }
 });
 
-//userSchema.plugin(uniqueValidator, { message: '{PATH} must be unique' });
+// categorySchema.plugin(uniqueValidator, { message: '{PATH} must be unique' });
 
 
 module.exports = mongoose.model('Category', categorySchema);

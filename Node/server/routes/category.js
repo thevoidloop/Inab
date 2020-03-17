@@ -30,5 +30,33 @@ app.post('/category', (req, res) => {
 });
 
 
+app.get('/category', (req, res) => {
+    let body = req.body;
+
+
+    Category.find({ name: body.name }, (err, categoryDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err: err
+            });
+        }
+
+        if (JSON.stringify(categoryDB) === '[]') {
+            return res.status(400).json({
+                ok: false,
+                err: 'No se encontro la categoria'
+            });
+        }
+
+        res.json({
+            ok: true,
+            categoryDB
+        });
+
+    });
+});
+
+
 
 module.exports = app;

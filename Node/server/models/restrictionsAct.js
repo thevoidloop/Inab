@@ -23,7 +23,7 @@ let monthSchema = new Schema({
     },
     valid: {
         type: Boolean,
-        default: false
+        default: true
     }
 });
 

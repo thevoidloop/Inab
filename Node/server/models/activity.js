@@ -16,7 +16,7 @@ let activitySchema = new Schema({
     },
     valid: {
         type: Boolean,
-        default: false
+        default: true
     }
 });
 

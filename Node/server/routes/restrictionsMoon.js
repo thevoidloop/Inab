@@ -1,20 +1,41 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const Category = require('../models/category');
+const RestrictionsMoon = require('../models/restrictionsMoon');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post('/category', (req, res) => {
+
+app.post('/restrictionsMoon', (req, res) => {
     let body = req.body;
 
-    let category = new Category({
-        name: body.name
+    let restrictionsMoon = new RestrictionsMoon({
+        activity: body.activity,
+        moon: body.moon
     });
 
-    category.save((err, categoryDB) => {
+    restrictionsMoon.save((err, restrictionsMoonDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err: err
+            });
+        }
+        res.json({
+            ok: true,
+            restrictionsMoon: restrictionsMoon
+        });
+    });
+});
+
+
+app.get('/restrictionsMoon', (req, res) => {
+    let body = req.body;
+
+
+    RestrictionsMoon.find({ activity: body.activity }, (err, restrictionsMoonDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -22,42 +43,21 @@ app.post('/category', (req, res) => {
             });
         }
 
+        if (JSON.stringify(restrictionsMoonDB) === '[]') {
+            return res.status(400).json({
+                ok: false,
+                err: 'No se encontro las restricciones'
+            });
+        }
+
+        console.log(restrictionsMoonDB.length);
         res.json({
             ok: true,
-            category: categoryDB
+            restrictions: restrictionsMoonDB
         });
     });
 });
 
-
-app.get('/category', (req, res) => {
-    let body = req.body;
-
-
-    Category.find({ name: body.name }, (err, categoryDB) => {
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err: err
-            });
-        }
-
-        if (JSON.stringify(categoryDB) === '[]') {
-            return res.status(400).json({
-                ok: false,
-                err: 'No se encontro la categoria'
-            });
-        }
-
-        res.json({
-            ok: true,
-            categoria: {
-                nombre: categoryDB[0].name,
-                id: categoryDB[0]._id
-            }
-        });
-    });
-});
 
 
 

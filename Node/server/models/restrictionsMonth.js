@@ -14,9 +14,9 @@ let monthSchema = new Schema({
         unique: false,
         required: [true, 'The activity is neccesary']
     },
-    moth: {
+    month: {
         type: String,
-        unique: true,
+        unique: false,
         enum: monthValid,
         lowercase: true,
         required: [true, 'The month is neccesary']
@@ -31,4 +31,4 @@ let monthSchema = new Schema({
 //userSchema.plugin(uniqueValidator, { message: '{PATH} must be unique' });
 
 
-module.exports = mongoose.model('RestrictionsAct', monthSchema);
+module.exports = mongoose.model('RestrictionsMonth', monthSchema);

@@ -3,7 +3,7 @@ const app = express();
 
 // app.use(require('./usuario'));
 app.use(require('./category'));
-// app.use(require('./producto'));
+app.use(require('./moon'));
 // app.use(require('./login'));
 // app.use(require('./upload'));
 // app.use(require('./imagen'));
